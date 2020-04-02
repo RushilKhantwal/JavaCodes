@@ -5,22 +5,32 @@ public class Solution {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String s = scan.nextLine();
-        
-                if(s.length() >400000)
-                    return;
-                
-                if(s.length() == 0 || s == "")
-                    System.out.println("0");
-               
-                String[] tokens = s.trim().split("[ .,?!'@_]+");
-
-        System.out.println(tokens.length);
-
-            for(int i=0;i<tokens.length;i++)
-                System.out.println(tokens[i]);
-
+        String s = scan.nextLine().trim();
         scan.close();
+        
+        if(s.length() == 0){
+            System.out.println(0);
+        }
+        else{
+            // Strip out non-word characters and replace with whitespace, trim leading/trailing whitespace
+            s = s.replaceAll("[^\\p{Alpha}]+", " ").trim();
+            
+            if(s.isEmpty()) {
+                // String contains no valid tokens
+                System.out.println(0);
+            }
+            else {
+                // Split the string into valid tokens
+                String[] strings = s.split("\\p{Space}+");
+                
+                // Print number of tokens
+                System.out.println(strings.length);
+                
+                // Print each token
+                for(String str : strings){
+                    System.out.println(str);
+                }
+            }
+        }
     }
 }
-
